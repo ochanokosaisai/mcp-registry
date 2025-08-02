@@ -1,0 +1,34 @@
+name: file-helper
+image: mcp/file-helper
+type: server
+meta:
+  category: devops
+  tags:
+    - filesystem
+    - file-management
+    - devops
+about:
+  title: File Helper
+  description: Advanced file operations and management utilities with directory scanning and file analysis capabilities
+  icon: https://avatars.githubusercontent.com/u/182288589?s=200&v=4
+source:
+  project: https://github.com/modelcontextprotocol/servers
+  branch: main
+  dockerfile: src/filesystem/Dockerfile
+run:
+  command:
+    - '{{\{file-helper.workdir|volume-target|into\}}'
+  volumes:
+    - '{{\{file-helper.workdir|volume|into\}}'
+  disableNetwork: false
+config:
+  description: Configure working directory for file helper operations
+  parameters:
+    type: object
+    properties:
+      workdir:
+        type: string
+        description: Working directory path for file operations
+        default: /tmp/file-helper
+    required:
+      - workdir
